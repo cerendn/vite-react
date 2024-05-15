@@ -49,13 +49,10 @@ function App() {
           <option value="square">Square</option>
           <option value="rectangle">Rectangle</option>
         </select>
-        <button onClick={createShape}>Create Shape</button>
+        <button onClick={cre}>Create Shape</button>
         <div className="shape-list">
           {shapeList.map((shape) => (
-            
-                 <ShapeCard key={shape.id} />
-                ))}
-            </div>
+            <ShapeCard key={shape.id} />
           ))}
         </div>
       </main>
