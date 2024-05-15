@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
+import Header from "./assets/components/header/Header";
+import ShapeCard from "./assets/components/shareCard/ShapeCard";
 
 function App() {
   const [shapeList, setShapeList] = useState([]);
@@ -7,27 +9,16 @@ function App() {
     color: "",
     shape: "",
   });
-  const getShape = (event) => {
-    event.preveventDefault();
-    setShapeList((prevShape) => [
-      ...prevShape,
+  const createShape = (event) => {
+    event.preventDefault();
+    setShapeList((prevShapeList) => [
+      ...prevShapeList,
       { ...shapeForm, id: Date.now().toString() },
     ]);
   };
   return (
     <>
-      <header>
-        <div>
-          <h1>Custom Shapes</h1>
-        </div>
-        <div>
-          <ul>
-            <li>Profile</li>
-            <li>Details</li>
-            <li>Contacs</li>
-          </ul>
-        </div>
-      </header>
+      <Header />
       <main>
         <select
           name="color"
@@ -58,27 +49,14 @@ function App() {
           <option value="square">Square</option>
           <option value="rectangle">Rectangle</option>
         </select>
-        <button onClick={getShape}>Create Shape</button>
+        <button onClick={createShape}>Create Shape</button>
         <div className="shape-list">
-          {shapeList.map((shape) => {
-            <div className="shape-card">
-              {shape.shape === "square" && (
-                <div
-                  style={{
-                    height: "50px",
-                    width: "50px",
-                    backgroundColor: shape.color,
-                  }}
-                ></div>
-              )}
-              {shape.shape === "circle" && (
-                <div style={{ backgroundColor: shape.color }}></div>
-              )}
-              {shape.shape === "rectangle" && (
-                <div style={{ backgroundColor: shape.color }}></div>
-              )}
-            </div>;
-          })}
+          {shapeList.map((shape) => (
+            
+                 <ShapeCard key={shape.id} />
+                ))}
+            </div>
+          ))}
         </div>
       </main>
     </>
